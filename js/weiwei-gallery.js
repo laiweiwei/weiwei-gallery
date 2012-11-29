@@ -4,6 +4,10 @@
  * date: 2012-11-28 14:49
  * sample:
  * <pre>
+ * <div id="gallery_box">
+ *     <li><a href="http://www.baidu.com" title="title1"><img src="images/47bc636162_w470.jpg" /></a></li>
+ *	   <li><a href="http://www.baidu.com" title="title2"><img src="images/923b67a189_w470.jpg" /></a></li>
+ * </div>
  * $(document).ready(function(){
 		var json = {
 			time:5000,
@@ -28,18 +32,18 @@
 			btn_box:{
 				height: "12px"
 			},
-			imgs:[
-				{
-					link:"http://www.baidu.com",
-					img:"images/47bc636162_w470.jpg",
-					title:"test 1"
-				},
-				{
-					link:"http://www.baidu.com",
-					img:"images/923b67a189_w470.jpg",
-					title:"test 2"
-				}
-			]
+			// imgs:[
+				// {
+					// link:"http://www.baidu.com",
+					// img:"images/47bc636162_w470.jpg",
+					// title:"test 1"
+				// },
+				// {
+					// link:"http://www.baidu.com",
+					// img:"images/923b67a189_w470.jpg",
+					// title:"test 2"
+				// }
+			// ]
 		};
 		
 		createWeiWeiGallery("gallery_box", json);
