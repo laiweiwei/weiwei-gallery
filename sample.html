@@ -6,7 +6,10 @@
 	#gallery_box{width:500px; height:300px; font-family: Arial;}	
 </style>
 
-<div id="gallery_box"></div>
+<div id="gallery_box">
+	<li><a href="http://www.baidu.com" title="title1"><img src="images/47bc636162_w470.jpg" /></a></li>
+	<li><a href="http://www.baidu.com" title="title2"><img src="images/923b67a189_w470.jpg" /></a></li>
+</div>
 
 <script>
 	$(document).ready(function(){
@@ -32,8 +35,8 @@
 			},
 			btn_box:{
 				height: "12px"
-			},
-			imgs:[
+			}
+			/*imgs:[
 				{
 					link:"http://www.baidu.com",//跳转链接
 					img:"images/47bc636162_w470.jpg",//图片
@@ -44,7 +47,7 @@
 					img:"images/923b67a189_w470.jpg",
 					title:"test 2"
 				}
-			]
+			]*/
 		};
 		
 		createWeiWeiGallery("gallery_box", json);

@@ -156,6 +156,35 @@ function createWeiWeiGallery(divId, json){
 	if (!imgs || imgs == undefined)
 		imgs = [];
 	
+	var _lis = $("#"+divId).children();
+	if (_lis){
+		$.each(_lis, function(index, _li){
+			if (_li){
+				var $_a = $(_li).find("a");
+				var title = "";
+				var link = "";
+				if ($_a){
+					title = $_a.attr("title");
+					if (!title || title == undefined)
+						title = "";
+					link = $_a.attr("href");
+					if (!link || link == undefined)
+						link = "";
+				
+					var $_img = $_a.find("img");
+					var img = "";
+					if ($_img){
+						img = $_img.attr("src");
+						if (!img || img == undefined)
+							img = "";
+						
+						imgs.push({title:title, link:link, img:img});
+					}
+				}
+			}
+		});
+	}
+	
 	var animate = json['animate'];
 	if (!animate || animate == undefined)
 		animate = {type:"slideDown", speed:"normal"};
