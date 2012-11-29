@@ -2,7 +2,12 @@
 ----
 
     WeiWeiGallery 是一个简单的图片幻灯片，可以用来做图片轮转，广告等。基于JQuery。
-    
+
+----
+[查看高清大图](http://dl.iteye.com/upload/picture/pic/120986/2a52c22d-8652-343d-82a2-d7791a55ea91.png)    
+![Screenshot](http://dl.iteye.com/upload/picture/pic/120986/2a52c22d-8652-343d-82a2-d7791a55ea91.png)
+
+----
 = sample 代码 =
 ----    
     <script src="js/jquery-1.6.4.min.js" type="text/javascript"></script> 
