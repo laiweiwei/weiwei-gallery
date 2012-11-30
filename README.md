@@ -15,7 +15,10 @@
     <style
     	#gallery_box{width:500px; height:300px; font-family: Arial;}	
     </style>
-    <div id="gallery_box"></div>
+    <div id="gallery_box">
+    	<li><a href="http://www.baidu.com" title="title3"><img src="images/47bc636162_w470.jpg" /></a></li>
+		<li><a href="http://www.baidu.com" title="title4"><img src="images/923b67a189_w470.jpg" /></a></li>
+    </div>
     <script>
     $(document).ready(function(){
     	var json = {
@@ -26,7 +29,8 @@
     			fontWeight:"bold", // 标题文字粗细
     			opacity:0.5, // 标题背景透明度
     			color:"white", // 标题文字颜色
-    			align:"left" // 标题文字位置
+    			align:"left", // 标题文字位置,
+    			//hidden:true // 是否隐藏标题
     		},
     		animate : {
     			type:"slideDown",// 动画效果 show,slideDown,fadeIn
@@ -39,7 +43,8 @@
     			height: "8px" // 按钮高度
     		},
     		btn_box:{
-    			height: "12px" // 按钮外框高度
+    			height: "12px", // 按钮外框高度
+    			//hidden: true // 是否隐藏按钮
     		},
     		imgs:[
     			{

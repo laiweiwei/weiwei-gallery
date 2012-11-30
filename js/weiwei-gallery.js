@@ -17,7 +17,8 @@
 				fontWeight:"bold",
 				opacity:0.5,
 				color: "white",
-				align:"left"
+				align:"left",
+				//hidden:true
 			},
 			animate: {
 				type:"slideDown",
@@ -30,7 +31,8 @@
 				height: "8px"
 			},
 			btn_box:{
-				height: "12px"
+				height: "12px",
+				//hidden: true
 			},
 			// imgs:[
 				// {
@@ -60,22 +62,30 @@ function createCSS(json){
 			fontWeight:"bold",
 			opacity:0.5,
 			color:"white",
-			align:"left"
+			align:"left",
+			hidden:false
 		};
-	
+	var __title_bg_display = "";
+	if (title['hidden'])
+		__title_bg_display = "display:none;";
+		
 	var btn = json['btn'];
 	if (!btn || btn == undefined)
 		btn = {background: ["white", "deeppink"], width:"8px", height:"8px"}
 	
 	var btn_box =  json['btn_box'];
 	if (!btn_box || btn_box == undefined)
-		btn_box = {height: "16px"}
-	
+		btn_box = {height: "16px",hidden:false}
+	var __btn_box_display = "";
+	if (btn_box['hidden'])
+		__btn_box_display = "display:none;";
+		
 	var __img = ".__gallery_img__{display:none;position:absolute; left:0; top:0; z-index:1080; overflow:hidden;}";
-	var __title_bg = ".__gallery_title_bg__{position:absolute; left:0; width:100%; height:"+title['height']+"; z-index:1081; background:black;}";
-	var __title = ".__gallery_title__{position:absolute; left:0; width:100%; text-align:"+title['align']+"; height:"+title['height']+"; line-height:"+title['height']+"; color:"+title['color']+"; font-size:"+title['fontSize']+"; font-weight:"+title['fontWeight']+"; text-indent:10px; z-index:1082;}";
-	var __btn_box = ".__gallery_btn_box__{position:absolute; text-align:right; left:0; z-index:1083; height:auto; padding:0; margin:0; height:"+btn_box['height']+";}";
-	var __btn = ".__gallery_btn__{cursor:pointer; display:inline-block; width:"+btn['width']+"; height:"+btn['height']+"; margin:0 2px; text-align: center; background:"+btn['background'][0]+"}";
+		
+	var __title_bg = ".__gallery_title_bg__{position:absolute; left:0; width:100%; height:"+title['height']+"; z-index:1081; background:black; "+__title_bg_display+"}";
+	var __title = ".__gallery_title__{"+__title_bg_display+" position:absolute; left:0; width:100%; text-align:"+title['align']+"; height:"+title['height']+"; line-height:"+title['height']+"; color:"+title['color']+"; font-size:"+title['fontSize']+"; font-weight:"+title['fontWeight']+"; text-indent:10px; z-index:1082;}";
+	var __btn_box = ".__gallery_btn_box__{"+__btn_box_display+" position:absolute; text-align:right; left:0; z-index:1083; height:auto; padding:0; margin:0; height:"+btn_box['height']+";}";
+	var __btn = ".__gallery_btn__{"+__btn_box_display+" cursor:pointer; display:inline-block; width:"+btn['width']+"; height:"+btn['height']+"; margin:0 2px; text-align: center; background:"+btn['background'][0]+"}";
 	var __btn_hover = ".__gallery_btn__:hover{background:"+btn['background'][1]+";}";
 	var __btn_selected = ".__gallery_btn_selected__{background:"+btn['background'][1]+";}";
 
@@ -90,7 +100,7 @@ function createHtml(gallery_box, json_datas){
 	var gallery_btn;
 
 	$.each(json_datas, function(index, json_data){
-		var id = 'gallery_img_id_'+index;
+		var id = '__gallery_img_id_'+index+'__';
 
 		var link = json_data['link'];
 		var img = json_data['img'];
@@ -112,7 +122,12 @@ function createHtml(gallery_box, json_datas){
 	return gallery_img + "<div class='__gallery_btn_box__'>"+gallery_btn+"</div>";
 }
 
-function fixCSS(json){
+function fixCSS(divId, json){
+	
+	var __pos = $("#"+divId).css('position');
+	if (!__pos || __pos == undefined || __pos == 'static')
+		$("#"+divId).css('position', "relative");
+	
 	var title = json['title'];
 	if (!title || title == undefined)
 		title = {height:"30px",
@@ -200,7 +215,7 @@ function createWeiWeiGallery(divId, json){
 	$("#"+divId).html(css + html);
 
 	// fix the CSS
-	fixCSS(json);
+	fixCSS(divId, json);
 
 	// bind the button click event
 	var interval ;
