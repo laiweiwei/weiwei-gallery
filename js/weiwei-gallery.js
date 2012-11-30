@@ -22,7 +22,8 @@
 			},
 			animate: {
 				type:"slideDown",
-				speed:"normal"
+				speed:"normal",
+				bind:"mouseover" // bind event type
 			},
 			btn:{
 				//background: ["url(images/circle_grey_8.png)", "url(images/circle_red_8.png)"], // button background
@@ -155,14 +156,14 @@ function fixCSS(divId, json){
 
 }
 
-function auto_ad_img_route(time){
+function auto_ad_img_route(time, eventType){
 	return window.setInterval(function(){
 		var btn = $(".__gallery_btn_selected__").next();
 		if ($(".__gallery_btn_selected__").attr("data-bind") == $(".__gallery_btn__").last().attr("data-bind")){
 			btn = $(".__gallery_btn__").first();
 		}
-
-		btn.click();
+		
+		btn.trigger(eventType);
 	}, time);
 }
 
@@ -206,7 +207,7 @@ function createWeiWeiGallery(divId, json){
 	
 	var animate = json['animate'];
 	if (!animate || animate == undefined)
-		animate = {type:"slideDown", speed:"normal"};
+		animate = {type:"slideDown", speed:"normal", bind: "click"};
 	
 	// create the CSS
 	var css = createCSS(json);
@@ -218,15 +219,18 @@ function createWeiWeiGallery(divId, json){
 	fixCSS(divId, json);
 
 	// bind the button click event
+	var _event_type = animate['bind'];
+	if (!_event_type || _event_type == undefined)
+		_event_type = 'click';
 	var interval ;
-	$(".__gallery_btn__").click(function(){
+	$(".__gallery_btn__").bind(_event_type, function(){
 		var cls = $(this).attr("class");
 		if ("__gallery_btn__ __gallery_btn_selected__" === cls)
 			return;
 
 		// init interval function
 		window.clearInterval(interval);
-		interval = auto_ad_img_route(time);
+		interval = auto_ad_img_route(time, _event_type);
 
 		var selectedId = $(".__gallery_btn_selected__").attr("data-bind");
 		
@@ -252,5 +256,5 @@ function createWeiWeiGallery(divId, json){
 		eval("currImg."+type+"('"+speed+"',function(){selectImg.css('display', 'none')})");
 	});
 
-	interval = auto_ad_img_route(time);
+	interval = auto_ad_img_route(time, _event_type);
 }
